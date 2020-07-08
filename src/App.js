@@ -40,16 +40,16 @@ function App() {
   }
 
   // editing data
-  // function handleEdit(id) {
-  //   editData = {id};
-  //   const data = books[id];
-  //     const {name, author, desc, photo} = data;
+  function handleEdit(id) {
+    editData = {id};
+    const data = books[id];
+      const {name, author, desc, photo} = data;
     
-  //     form.current[0].value = name;
-  //     form.current[1].value = author;
-  //     form.current[2].value = desc;
-  //     form.current[3].value = photo;
-  // }
+      form.current[0].value = name;
+      form.current[1].value = author;
+      form.current[2].value = desc;
+      form.current[3].files = photo;
+  }
 
   // deleting data
   function handleDelete(id) {
@@ -108,7 +108,7 @@ function App() {
         </thead>
         <tbody>
   
-         {books.map((book, i) => <Row key={book.id} num={i+1} data={book} view={view} del={handleDelete}  />)}
+         {books.map((book, i) => <Row key={book.id} num={i+1} data={book} view={view} del={handleDelete} edit={handleEdit}  />)}
         </tbody>
       </table>
       </div>
@@ -120,7 +120,7 @@ function App() {
 export default App;
 
 function Row(props) {
-  const { data, num, del, view } = props 
+  const { data, num, del, view, edit } = props 
   
   return (
     <tr>
@@ -129,7 +129,7 @@ function Row(props) {
       <td> {data.author} </td>
       <td className="action">
         <button className="view-btn" onClick={()=>view(num-1)} >view</button>
-        <button className="edit" >edit</button>
+        <button className="edit" onClick={()=>edit(num-1)} >edit</button>
         <button className="delete" onClick={()=>del(num-1)}>delete</button>
       </td>
     </tr>
